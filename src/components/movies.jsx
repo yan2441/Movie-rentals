@@ -3,20 +3,51 @@ import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 
 
-export default class Movies extends Component{
+class Movies extends Component{
   state = {
     movies:getMovies()
-  }
+  };
 
   handleDelete = movie =>{
-
+    const movies = this.state.movies.filter(m => m._id !== movie._id);
+    this.setState({movies});
   };
 
   render(){
+    const { length: count} = this.state.movies;
+
+    if(count === 0)
+      return <p className="m-3">there is no movies in database</p>;
+
     return (
       <React.Fragment>
-
+        <p className="m-3">showing {count} movies in the database</p>
+        <table className="table">
+          <thead className="thead-light">
+            <tr>
+              <th>Title</th>
+              <th>Genra</th>
+              <th>Stock</th>
+              <th>Rate</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.movies.map(movie =>(
+              <tr key={movie._id}>
+                <td>{movie.title}</td>
+                <td>{movie.genre.name}</td>
+                <td>{movie.numberInStock}</td>
+                <td>{movie.dailyRentalRate}</td>
+                <td><button onClick={()=> this.handleDelete(movie)}
+                className="btn btn-danger btn-sm">Delate</button></td>
+              </tr>
+              ))}
+          </tbody>
+        </table>
       </React.Fragment>
     );
   };
 }
+
+export default Movies;
