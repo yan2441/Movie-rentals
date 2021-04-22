@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Movie from './components/movies';
 
+
 class App extends Component {
   
   render() { 
