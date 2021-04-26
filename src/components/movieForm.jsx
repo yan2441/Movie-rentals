@@ -12,6 +12,7 @@ class MovieForm extends Form {
   }
 
   schema = {
+    _id: Joi.string(),
     title : Joi.string().required().label("Title"),
     genreId : Joi.string().required().label("Genre"),
     numberInStock : Joi.number().positive().max(100).label("Number In Stock"),
@@ -23,7 +24,7 @@ class MovieForm extends Form {
     this.setState({genres});
 
     const movieId = this.props.match.params.id;
-    if (movieId === 'new') return 
+    if (movieId === "new") return 
 
     const movie = getMovie(movieId);
     if (!movie) return this.props.history.replace("/not-found");
@@ -31,14 +32,14 @@ class MovieForm extends Form {
     this.setState({data : this.mapToViewModel(movie)})
   }
 
-  mapToViewModel(movie){
+  mapToViewModel(movie) {
     return {
-      _id : movie._id,
-      title : movie.title,
-      genreId : movie.genre._id,
-      numberInStock : movie.numberInStock,
-      dailyRentalRate : movie.dailyRentalRate,
-    }
+      _id: movie._id,
+      title: movie.title,
+      genreId: movie.genre._id,
+      numberInStock: movie.numberInStock,
+      dailyRentalRate: movie.dailyRentalRate
+    };
   }
 
   doSubmit =()=>{
@@ -47,7 +48,7 @@ class MovieForm extends Form {
     this.props.history.push("/movies")
   }
   render() { 
-    const {match , history} = this.props;
+    //const {match , history} = this.props;
     return ( 
     <div>
     <h1>Movie form</h1>
