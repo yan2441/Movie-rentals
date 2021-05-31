@@ -2,7 +2,7 @@ import React from 'react';
 import Form from './form';
 import Joi from 'joi-browser';
 import * as userService from './../../services/userService';
-import { constant } from 'lodash';
+//import { constant } from 'lodash';
 import { loginWithJWT } from '../../services/authService';
 
 class RegisterForm extends Form {
